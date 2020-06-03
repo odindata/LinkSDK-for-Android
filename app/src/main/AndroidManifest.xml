@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.odin.link.demo">
+
+    <!--集成linkSDK和shareSDK需要的权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".OdinLinkApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SplashActivity"
+            android:launchMode="singleTask" />
+
+        <!--设置唤醒Activity的scheme、host和path，必须和奥丁数据开发者中心OdinLink的配置页面保持一致-->
+        <activity
+            android:name=".ui.OneKeyWakeupActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.odin.link"
+                    android:path="/demo/pagea"
+                    android:scheme="mlink" />
+            </intent-filter>
+        </activity>
+
+        <!--设置唤醒Activity的scheme、host和path，必须和奥丁数据开发者中心OdinLink的配置页面保持一致-->
+        <activity
+            android:name=".ui.RestoreSceneActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.odin.link"
+                    android:path="/demo/newsdetail"
+                    android:scheme="mlink" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.ScenarioReductionActivity" />
+
+
+        <!--===================================分享回调==========================================-->
+
+        <!-- 微信回调的Activity -->
+        <activity
+            android:name="cn.odinshare.wechat.utils.WechatHandlerActivity"
+            android:exported="false" />
+
+        <activity-alias
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:targetActivity="cn.odinshare.wechat.utils.WechatHandlerActivity" />
+
+
+        <!-- 钉钉回调Activity -->
+        <activity
+            android:name="cn.odinshare.dingding.utils.DingdingHandlerActivity"
+            android:exported="false" />
+
+        <activity-alias
+            android:name=".ddshare.DDShareActivity"
+            android:exported="true"
+            android:targetActivity="cn.odinshare.dingding.utils.DingdingHandlerActivity" />
+
+
+        <!-- 腾讯QQ和QZone回调的Activity -->
+        <activity
+            android:name="cn.odinshare.qq.qq.QQReceiveActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- tencent{换成您申请腾讯的appid} -->
+                <data android:scheme="tencent101872615" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- 核心的Activity，不可缺少 -->
+        <activity
+            android:name="cn.odinshare.core.OdinUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!--===================================分享回调==========================================-->
+
+    </application>
+
+</manifest>
