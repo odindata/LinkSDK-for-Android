@@ -39,7 +39,7 @@ public class RestoreSceneAdapter extends RecyclerView.Adapter<RestoreSceneAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RestoreSceneActivity.newInstance(holder.itemView.getContext(), restoreBean.getTitle(), restoreBean.getContent(), position == 0);
+                RestoreSceneActivity.newInstance(holder.itemView.getContext(), restoreBean.getTitle(), restoreBean.getContent(), restoreBean.getUrl());
             }
         });
     }

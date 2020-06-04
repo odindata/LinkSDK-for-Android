@@ -59,7 +59,7 @@ public class ScenarioReductionActivity extends BaseSchemeActivity {
         RestoreBean restoreBean1 = new RestoreBean();
         restoreBean1.setTitle("尽己所能、团结合作 四个关键词读懂习近平最新讲话");
         restoreBean1.setCount("置顶 专题 1183人浏览");
-        restoreBean1.setUrl("file:///android_asset/news_detail.html");
+        restoreBean1.setUrl(getString(R.string.str_share_url_news_detail));
         restoreBean1.setIcon(R.mipmap.new_1);
         restoreBean1.setContent(getString(R.string.str_news_content1));
         restoreBeanList.add(restoreBean1);
@@ -67,7 +67,7 @@ public class ScenarioReductionActivity extends BaseSchemeActivity {
         RestoreBean restoreBean2 = new RestoreBean();
         restoreBean2.setTitle("中共中央、国务院：探索农村宅基地“三权分置”！究竟怎么改革？快来看");
         restoreBean2.setCount("1142人浏览");
-        restoreBean2.setUrl("file:///android_asset/news_detail2.html");
+        restoreBean2.setUrl(getString(R.string.str_share_url_news_detail2));
         restoreBean2.setIcon(R.mipmap.new_2);
         restoreBean2.setContent(getString(R.string.str_news_content2));
         restoreBeanList.add(restoreBean2);

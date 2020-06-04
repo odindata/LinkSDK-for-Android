@@ -24,11 +24,10 @@ public class RestoreSceneActivity extends BaseSchemeActivity {
     private TextView mTvTitle;
     private TextView mTvTime;
     private TextView mTvContent;
-    private boolean isFirstDemo = true;
 
     private static final String EXTRA_TITLE = "EXTRA_TITLE";
     private static final String EXTRA_CONTENT = "EXTRA_CONTENT";
-    private static final String EXTRA_IS_FIRST_DEMO = "EXTRA_IS_FIRST_DEMO";
+    private static final String EXTRA_SHARE_URL = "EXTRA_SHARE_URL";
 
     private static final String LINK_KEY_DATE = "date";
     private static final String LINK_KEY_PAGE = "page";
@@ -39,11 +38,11 @@ public class RestoreSceneActivity extends BaseSchemeActivity {
     private static final String LINK_VALUE_DATE_DEMO2 = "demo2";
     private static final String LINK_VALUE_PAGE_DEMO2 = "detail2";
 
-    public static void newInstance(Context context, String title, String content, boolean isFirstDemo) {
+    public static void newInstance(Context context, String title, String content, String shareUrl) {
         Intent intent = new Intent(context, RestoreSceneActivity.class);
         intent.putExtra(EXTRA_TITLE, title);
         intent.putExtra(EXTRA_CONTENT, content);
-        intent.putExtra(EXTRA_IS_FIRST_DEMO, isFirstDemo);
+        intent.putExtra(EXTRA_SHARE_URL, shareUrl);
         context.startActivity(intent);
     }
 
@@ -73,7 +72,7 @@ public class RestoreSceneActivity extends BaseSchemeActivity {
         Intent intent = getIntent();
         String title = intent.getStringExtra(EXTRA_TITLE);
         String content = intent.getStringExtra(EXTRA_CONTENT);
-        isFirstDemo = intent.getBooleanExtra(EXTRA_IS_FIRST_DEMO, true);
+        final String shareUrl = intent.getStringExtra(EXTRA_SHARE_URL);
         mTvTitle.setText(title == null ? "" : title);
         mTvContent.setText(content == null ? "" : content);
         mTvTime.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
@@ -83,10 +82,6 @@ public class RestoreSceneActivity extends BaseSchemeActivity {
         mImgShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String shareUrl = getString(R.string.str_share_url_news_detail);
-                if (!isFirstDemo) {
-                    shareUrl = getString(R.string.str_share_url_news_detail2);
-                }
                 ShareUtils.getInstance(RestoreSceneActivity.this).oneKeyShare(shareUrl);
             }
         });
@@ -116,12 +111,10 @@ public class RestoreSceneActivity extends BaseSchemeActivity {
         String date = objDate == null ? "" : objDate.toString();
         String page = objPage == null ? "" : objPage.toString();
         if (LINK_VALUE_DATE_DEMO1.equals(date) && LINK_VALUE_PAGE_DEMO1.equals(page)) {
-            isFirstDemo = true;
             mTvTitle.setText(getString(R.string.str_news_title1));
             mTvContent.setText(getString(R.string.str_news_content1));
             mTvTime.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
         } else if (LINK_VALUE_DATE_DEMO2.equals(date) && LINK_VALUE_PAGE_DEMO2.equals(page)) {
-            isFirstDemo = false;
             mTvTitle.setText(getString(R.string.str_news_title2));
             mTvContent.setText(getString(R.string.str_news_content2));
         }
